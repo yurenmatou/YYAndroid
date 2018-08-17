@@ -1,1 +1,95 @@
-开源项目第一个
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Keywords" content="关键字，关键词">
+  <meta name="Description" content="描述信息">
+  <title>七夕快乐</title>
+  <!--css 样式 层叠样式表-->
+  <style type="text/css">
+    *{margin:0;padding:0;}
+    html,body{width:100%;height:100%;}
+    body{background:url(images/3.jpg);background-size:cover;overflow:hidden;}
+    /*top start*/
+    .top{width:400px;height:100px;margin:60px auto;font-size:30px;font-family:"华文行楷";color:#fff;}
+    /*background:-webkit-linear-gradient(45deg,#ff0000,#ff0099,#ffff00,#33ff00,#3300cc,#000000);*/
+    /*end top*/
+    /*box start*/
+    .box{width:310px;height:310px;margin:auto;perspective:800px;}
+    .box .pic{position:relative;transform-style:preserve-3d;/*搭载3d环境*/animation:play 10s linear infinite;}
+    /*animation:play 速度 匀速 循环;*/
+    .box ul li{list-style:none;position:absolute;top:0;left:0;}
+    /*end box*/
+    #text{width:500px;height:200px;margin:auto;color:#6fade1;margin:auto;font-size:24px;font-family:"方正喵呜体";}
+    /*定义一个关键帧*/
+    @keyframes play{
+        from{transform:rotateY(0deg);}
+        to{transform:rotateY(360deg);}
+    }
+  </style>
+ </head>
+ <body>
+    <!--top start-->
+    <p class="top">
+    <!--marquee滚动标签 behaviod="alternate"碰撞-->
+    <marquee behavior="alternate">时光不老 我们不散</marquee>
+    </p>
+    <!--end top-->
+    <!--box start-->
+    <p class="box">
+        <p class="pic">
+            <ul>
+                <!--图片四要素 src路径 width height alt描述 优化-->
+                <li><img src="images/1.png" width="" height="" alt="描述"></li>
+                <li><img src="images/2.png" width="" height="" alt="描述"></li>
+                <li><img src="images/3.png" width="" height="" alt="描述"></li>
+                <li><img src="images/4.png" width="" height="" alt="描述"></li>
+                <li><img src="images/5.png" width="" height="" alt="描述"></li>
+                <li><img src="images/6.png" width="" height="" alt="描述"></li>
+            </ul>
+        </p>
+    </p>
+    <!--end box-->
+    <p id="text"></p>
+    <!--插入背景音乐-->
+    <embed src="周杰伦+-+告白气球.mp3"/>
+    <!--引入jQuery类库-->
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <!--下雪的动画背景 js-->
+    <script type="text/javascript" src="js/trans.js"></script>
+    <script>
+        //拿到每一个li
+        $(".pic ul li").each(function(i){
+            //每一张图片的旋转角度是不相同的
+            var deg=360/$(".pic ul li").size();
+        //当前的li对象
+        $(this).css({"transform":"rotateY("+deg*i+"deg) translateZ(216px)"});
+        //调用下雪的动画
+        $.fn.snow({
+            minSize:10,
+            maxSize:15,
+            newOn:500,
+            flakeColor:"#fff"
+        });
+    });
+        var i=0;
+        var str="把天上的银河截下，汇成爱情的心河，流进你的心里;把天上的鹊桥摘下，变成爱情的心桥，搭在你的心里。给你此生不变的挚爱. 七夕快乐 ! ! !";
+        //语音
+        var obj = $('<audio src="http://fanyi.baidu.com/gettts?lan=zh&amp;text='+str+'&amp;spd=5&amp;sorce=web" autoplay></audio>');
+        $("body").append(obj);
+        window.onload= function typing(){
+            //获取p
+        var myp=document.getElementById("text");
+        //实现逐字显示
+        myp.innerHTML+=str.charAt(i);
+        i++;
+        //定时器
+        var id = setTimeout(typing,100);
+            //判断str显示完后清空setTimeout
+            if(i==str.length){
+                clearTimeout(id);
+            }
+        }
+    </script>
+ </body>
+</html>
